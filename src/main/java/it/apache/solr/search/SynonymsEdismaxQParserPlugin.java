@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin implements ResourceLoaderAware {
 
-	private static final Logger Log = LoggerFactory.getLogger(SynonymsEdismaxQParserPlugin.class);
+	private static final Logger logger = LoggerFactory.getLogger(SynonymsEdismaxQParserPlugin.class);
 	private String synonyms;
 	private String tokenizerFactory;
 
@@ -36,7 +36,7 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 	@Override
 	@SuppressWarnings("rawtypes") 
 	public void init(NamedList initArgs) {
-		Log.info("init ...");
+		logger.info("init ...");
 		SolrParams params = SolrParams.toSolrParams(initArgs);
 		synonyms = params.get("synonyms");
 		tokenizerFactory = params.get("tokenizerFactory");
@@ -56,7 +56,7 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 			if (tokenizerFactory == null)
 				tokenizerFactory = "solr.WhitespaceTokenizerFactory";
 
-			Log.info("synonyms =" + synonyms);
+			logger.info("synonyms =" + synonyms);
 
 			Map<String, String> args = new HashMap<>();
 			args.put("synonyms", synonyms);
@@ -67,7 +67,7 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 			try {
 				syf = new SynonymFilterFactory(args);
 			} catch (SolrException e) {
-				Log.error(e.getMessage());
+				logger.error(e.getMessage());
 				syf = null;
 			}
 		}
@@ -82,10 +82,10 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 		try {
 			modQ = applySynonyms(qStr);
 			if (!modQ.equals(qStr))
-				Log.info(qStr + " -> " + modQ);
+				logger.info(qStr + " -> " + modQ);
 			modparams.set("q", modQ);
 		} catch (IOException ioe) {
-			Log.error(ioe.getMessage());
+			logger.error(ioe.getMessage());
 		}
 
 		return super.createParser(modQ, localParams, modparams, req);
@@ -120,7 +120,7 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 				if (syf != null)
 					syf.inform(this.loader);
 			} catch (IOException e) {
-				Log.error("Failed to create parser " + this.getClass().getName());
+				logger.error("Failed to create parser " + this.getClass().getName());
 				syf = null;
 			}
 		}
