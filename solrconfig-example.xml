@@ -1,5 +1,5 @@
 
-<queryParser name="autophrasingParser" class="it.apache.solr.search.SynonymsEdismaxQParserPlugin">
+<queryParser name="synonymsQueryParser" class="it.apache.solr.search.SynonymsEdismaxQParserPlugin">
 	<str name="synonyms">synonyms-file1.txt,synonyms-split-on-case-change.txt,synonyms-manufacturer.txt</str>
 	<str name="ignoreCase">true</str>
 	<str name="expand">false</str>
