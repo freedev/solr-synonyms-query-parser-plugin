@@ -67,7 +67,7 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 			try {
 				syf = new SynonymFilterFactory(args);
 			} catch (SolrException e) {
-				logger.error(e.getMessage());
+				logger.error("Error creating SynonymFilterFactory "+ e.getMessage());
 				syf = null;
 			}
 		}
