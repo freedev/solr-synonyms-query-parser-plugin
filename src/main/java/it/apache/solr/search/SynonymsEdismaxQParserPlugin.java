@@ -105,6 +105,10 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 			logger.warn("syf is null exiting!!!");
 			return input;
 		}
+		if (input == null) {
+			logger.warn("input is null exiting!!!");
+			return input;
+		}
 		StringBuffer strbuf = new StringBuffer();
 		try (WhitespaceTokenizer wt = new WhitespaceTokenizer(Version.LUCENE_48, new StringReader(input))) {
 			try (TokenStream syn = syf.create(wt)) {
