@@ -89,9 +89,11 @@ public class SynonymsEdismaxQParserPlugin extends ExtendedDismaxQParserPlugin im
 		try {
 			logger.debug("evaluating: "+qStr);
 			modQ = applySynonyms(qStr);
-			if (!modQ.equals(qStr))
-				logger.info(qStr + " -> " + modQ);
-			modparams.set("q", modQ);
+			if (modQ != null) {
+				if (!modQ.equals(qStr))
+					logger.info(qStr + " -> " + modQ);
+				modparams.set("q", modQ);
+			}
 		} catch (IOException ioe) {
 			logger.error(ioe.getMessage());
 		}
