@@ -16,3 +16,7 @@ dist/**
 **/target/*
 
 /target/
+.idea/
+lucene-solr/
+target/
+*.iml
